@@ -220,7 +220,7 @@ function VehicleTypes() {
         await axiosInstance.post(route, formData)
             .then(response => {
                 console.log(response.data.message);
-                if (response.data.message === "Vehicle type addedd successfully") {
+                if (response.data.message === "Vehicle type addedd successfully" || response.data.message === "Vehicle type updated successfully") {
                     setToastMessage(response.data.message);
                     setSuccessToast(true);
                     emptyForm();
