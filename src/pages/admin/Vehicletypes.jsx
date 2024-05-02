@@ -33,7 +33,7 @@ function VehicleTypes() {
 
     // Fetch Vehile types
     const fetchVehicleTypes = async () => {
-        await axiosInstance.post('get-vehicle-types')
+        await axiosInstance.get('get-vehicle-types')
             .then(response => {
                 // setTimeout(() => {
                 setVehicleTypes(response.data)

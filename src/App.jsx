@@ -9,6 +9,9 @@ import Vehicles from './pages/admin/Vehicles';
 import Drivers from './pages/admin/Drivers';
 import Clients from './pages/admin/Clients';
 import VehicleTypes from './pages/admin/Vehicletypes';
+import VehiclesAdd from './pages/admin/VehiclesAdd';
+import VehiclesEdit from './pages/admin/VehiclesEdit';
+
 
 function App() {
     const [role, setRole] = useState('');
@@ -53,11 +56,19 @@ function App() {
                     // Admin route 
                     <Route path="/" element={< Layout />}>
                         <Route path="/dashboard" element={<Dashboard />} />
+
                         <Route path="/bookings" element={<Bookings />} />
-                        <Route path="/vehicles" element={<Vehicles />} />
+
+                        <Route path="/vehicles/" element={<Vehicles />} />
+                        <Route path="/vehicles/add-vehicle" element={<VehiclesAdd />} />
+                        <Route path="/vehicles/edit-vehicle/:id" element={<VehiclesEdit />} />
+
                         <Route path="/vehicle-types" element={<VehicleTypes />} />
+
                         <Route path="/drivers" element={<Drivers />} />
+
                         <Route path="/clients" element={<Clients />} />
+
                         <Route path="/" element={<Navigate to="/dashboard" />} />
                         <Route path="/*" element={<Navigate to="/dashboard" />} />
                     </Route>
