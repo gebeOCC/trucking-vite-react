@@ -11,6 +11,8 @@ import Clients from './pages/admin/Clients';
 import VehicleTypes from './pages/admin/Vehicletypes';
 import VehiclesAdd from './pages/admin/VehiclesAdd';
 import VehiclesEdit from './pages/admin/VehiclesEdit';
+import DriversAdd from './pages/admin/DriversAdd';
+import DriversEdit from './pages/admin/DriversEdit';    
 
 
 function App() {
@@ -66,6 +68,8 @@ function App() {
                         <Route path="/vehicle-types" element={<VehicleTypes />} />
 
                         <Route path="/drivers" element={<Drivers />} />
+                        <Route path="/drivers/add-driver" element={<DriversAdd />} />
+                        <Route path="/drivers/edit-driver/:id" element={<DriversEdit />} />
 
                         <Route path="/clients" element={<Clients />} />
 

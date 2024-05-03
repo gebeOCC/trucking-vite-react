@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "../../axios/axiosInstance";
-import { useState } from "react";
 import Toast from "../components/Toast";
 
 function Vehicles() {

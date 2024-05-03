@@ -66,6 +66,7 @@ function VehicleTypes() {
                     weight_limit: response.data.weight_limit,
                     price: response.data.price,
                 })
+                console.log(response.data)
             })
     }
 
@@ -184,8 +185,6 @@ function VehicleTypes() {
 
     // SUBMIT DATA
     const handleSubmit = async (event) => {
-
-
         event.preventDefault();
 
         setAddVehicleTypeLoading(true);

@@ -75,7 +75,7 @@ function VehiclesAdd(props) {
                 console.log(response.data.message)
                 if (response.data.message) {
                     setToastMessage(response.data.message)
-                    setSuccessToast(true)
+                    setSuccessToast()
                     setForm({
                         model: "", plate_number: "", vehicle_type_id: "", vehicle_status: "active",
                     })
