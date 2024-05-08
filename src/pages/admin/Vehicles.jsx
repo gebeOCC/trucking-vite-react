@@ -151,24 +151,24 @@ function Vehicles() {
                     </svg>
                     Add Vehicle
                 </label>
-            </Link>
-            {/* TABLE */}
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Model</th>
-                        <th>Plate Number</th>
-                        <th>Vehicle type</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* TBODY */}
-                    {vehiclesData}
-                </tbody>
-            </table>
+                    </Link>
+                    {/* TABLE */}
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Model</th>
+                                <th>Plate Number</th>
+                                <th>Vehicle type</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* TBODY */}
+                            {vehiclesData}
+                        </tbody>
+                    </table>
 
             <dialog id="deleteModal" className="modal">
                 <div className="modal-box">

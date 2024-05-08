@@ -49,7 +49,7 @@ function DriversEditProfile(props) {
     useEffect(() => {
         setFormDefault();
     }, [])
-    
+
     const [invalidFields, setInvalidFields] = useState([""]);
 
     const handleChange = (e) => {
@@ -104,12 +104,12 @@ function DriversEditProfile(props) {
 
         await axiosInstance.post(`update-driver-profile/${props.formProfile.id}`, formData)
             .then(response => {
-                if (response.data.message){
+                if (response.data.message) {
                     console.log(response.data.message)
                     setSuccessToast(true)
                 }
                 setLoading(false);
-            })  
+            })
     }
 
     return (
