@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../trucking-laravel"
+		},
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../../../../../trucking-ionic-react"
+		}
+	],
+    "settings": {}
+}

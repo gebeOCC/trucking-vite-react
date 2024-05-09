@@ -28,7 +28,7 @@ export default {
             // "fantasy",
             // "wireframe",
             // "black",
-            "luxury",
+            // "luxury",
             // "dracula",
             // "cmyk",
             // "autumn",

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axiosInstance from './axios/axiosInstance';
 import Layout from './pages/components/Layout';
 import Dashboard from './pages/admin/Dashboard';
-import Bookings from './pages/admin/Bookings';
+import Bookings from './pages/admin/Booking/Bookings';
 import Vehicles from './pages/admin/Vehicles';
 import Drivers from './pages/admin/Drivers';
 import Clients from './pages/admin/Clients';
@@ -12,7 +12,8 @@ import VehicleTypes from './pages/admin/Vehicletypes';
 import VehiclesAdd from './pages/admin/VehiclesAdd';
 import VehiclesEdit from './pages/admin/VehiclesEdit';
 import DriversAdd from './pages/admin/DriversAdd';
-import DriversEdit from './pages/admin/DriversEdit';    
+import DriversEdit from './pages/admin/DriversEdit';
+import BookingAssign from './pages/admin/Booking/BookingAssign'; 
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard />} />
 
                         <Route path="/bookings" element={<Bookings />} />
+                        <Route path="/bookings/assign/:id" element={<BookingAssign />} />
 
                         <Route path="/vehicles/" element={<Vehicles />} />
                         <Route path="/vehicles/add-vehicle" element={<VehiclesAdd />} />

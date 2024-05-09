@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axiosInstance from "../../axios/axiosInstance";
+import axiosInstance from "../../../axios/axiosInstance";
+import { Link } from "react-router-dom";
 
 function Bookings() {
     const [bookings, setBookings] = useState([]);
@@ -14,34 +15,11 @@ function Bookings() {
             })
     }, [])
 
-    var bookingsData = "";
-
-    if (fetchLoading) {
-        // TBODY skeleton
-        bookingsData = Array.from({ length: 1 }).map((_, index) => (
-            <tr key={index} className="skeleton">
-                <th></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        ));
-    } else if (bookings.length > 0) {
-        // TBODY with vehicle
-        bookingsData = bookings.map((booking, index) => (
-            <tr key={index}>
-                <td>{booking.id}</td>
-                <td>{booking.full_name}</td>
-                <td>{booking.pickup_type}</td>
-                <td>{booking.pickup_date}</td>
-                <td>{convertToAMPM(booking.pickup_time)}</td>
-                <td>
-                    <button className="btn btn-active btn-accent">Assign</button>
-                </td>
-            </tr>
-        ));
-    }
+    const formatDate = (dateString) => {
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleString('en-US', options);
+    };
 
     function convertToAMPM(time) {
         // Create a new Date object from the input time string
@@ -61,6 +39,49 @@ function Bookings() {
 
         return formattedTime;
     }
+
+    var bookingsData = "";
+
+    if (fetchLoading) {
+        // TBODY skeleton
+        bookingsData = Array.from({ length: 1 }).map((_, index) => (
+            <tr key={index} className="skeleton">
+                <th></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        ));
+    } else if (bookings.length > 0) {
+        // TBODY with vehicle
+        bookingsData = bookings.map((booking, index) => (
+            <tr key={index}>
+                <td>{booking.id}</td>
+                <td>{booking.full_name}</td>
+                <td>{booking.pickup_type}</td>
+                <td>{formatDate(booking.pickup_date)}</td>
+                <td>{convertToAMPM(booking.pickup_time)}</td>
+                <td>
+                    <Link to={`./assign/${booking.id}`}>
+                        <button className="btn btn-active btn-accent">Assign</button>
+                    </Link>
+                </td>
+            </tr>
+        ));
+    } else {
+        bookingsData = Array.from({ length: 1 }).map((_, index) => (
+            <tr key={index}>
+                <th>No pending bookings</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        ));
+    }
+    
 
     return (
         <>

@@ -39,7 +39,7 @@ function Drawer() {
                             <li className="content-center">
                                 <div className="avatar">
                                     <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                        <img src="https://scontent.fdvo2-1.fna.fbcdn.net/v/t39.30808-1/427856532_384670854169071_4868986935939205060_n.jpg?stp=cp6_dst-jpg_p100x100&_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEfGdPkeuXY542tq5B-OCpfiW3sJTNyOsqJbewlM3I6ytvvabmZR8w0AifLMIOlEGmJJJhMv-oHAw2bYrqRt9qE&_nc_ohc=e1jpbVI3pzIAb4_qb5i&_nc_ht=scontent.fdvo2-1.fna&oh=00_AfDZ9oQYUoDWvTmH_inrOTV_CP9x5Ae0I1a4hqtKZ3uZfQ&oe=6636C59E" />
+                                        <img src="https://static-koimoi.akamaized.net/wp-content/new-galleries/2021/05/robert-pattinson-wants-the-batman-to-have-his-multiple-love-interests-001.jpg" />
                                     </div>
                                 </div>
                             </li>
