@@ -23,7 +23,7 @@ function BookingVehicle({ vehicles, form, setForm, formatDate, convertToAMPM }) 
 
                     </p>
                     <div>
-                        <h2 className="text-lg font-semibold mb-2">Active travels (pickup details)</h2>
+                        <h2 className="text-lg font-semibold mb-2">Active travels</h2>
                         {vehicle.travels.length > 0 ? (
                             vehicle.travels.map((travel) => (
                                 <div key={travel.id} className="border rounded-md p-2 mb-2 bg-transparent">
