@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../../axios/axiosInstance";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Toast from "../components/Toast";
 
 function VehiclesAdd(props) {
@@ -11,6 +11,8 @@ function VehiclesAdd(props) {
 
     const [toastMessage, setToastMessage] = useState('');
     const [successToast, setSuccessToast] = useState(false);
+
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         model: "",
@@ -66,20 +68,23 @@ function VehiclesAdd(props) {
 
         let route = 'add-vehicle'
 
-        if(id){
+        if (id) {
             route = `update-vehicle/${id}`
         }
 
         await axiosInstance.post(route, form)
             .then(response => {
                 console.log(response.data.message)
-                if (response.data.message) {
-                    setToastMessage(response.data.message)
-                    setSuccessToast()
-                    setForm({
-                        model: "", plate_number: "", vehicle_type_id: "", vehicle_status: "active",
-                    })
+                if (response.data.message === 'success') {
+                    navigate('/vehicles')
                 }
+                // if (response.data.message) {
+                //     setToastMessage(response.data.message)
+                //     setSuccessToast()
+                //     setForm({
+                //         model: "", plate_number: "", vehicle_type_id: "", vehicle_status: "active",
+                //     })
+                // }
                 setLoading(false);
             })
     }
@@ -96,6 +101,36 @@ function VehiclesAdd(props) {
             Choose Vehicle type
         </option>
     );
+
+    const fetchLoading = () => {
+        if (id) {
+            if (vehicletypes.length > 0 && form.model) {
+                return true;
+            }
+        } else {
+            if (vehicletypes.length > 0) {
+                return true;
+            }
+        }
+    }
+
+    if (!fetchLoading()) {
+        return <>
+            <Link to={'/drivers'}>
+                <label htmlFor="add-vehicle-modal" className="btn mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+                    Back
+                </label>
+            </Link>
+            <div>
+
+                <span className="loading loading-ring loading-lg"></span>
+            </div>
+        </>
+
+    }
 
     return (
         <>

@@ -114,7 +114,7 @@ function DriversEditProfile(props) {
 
     return (
         <>
-            <div className="flex flex-col gap-2 bg-accent rounded-xl p-4">
+            <div className="flex flex-col gap-2 bg- rounded-xl p-4">
                 <form action="">
                     <div className="flex gap-4">
                         <label className="form-control w-full">
