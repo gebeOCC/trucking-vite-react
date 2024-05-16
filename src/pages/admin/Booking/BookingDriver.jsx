@@ -5,7 +5,7 @@ function BookingDriver({ drivers, form, setForm, formatDate, convertToAMPM }) {
         <div className="container">
             {drivers.map((driver) => (
                 <div key={driver.id} className="border rounded-md p-4 mb-4">
-                    <h2 className="text-xl font-semibold mb-2">Model: {driver.full_name}</h2>
+                    <h2 className="text-xl font-semibold mb-2">Driver: {driver.full_name}</h2>
                     <p
                         className="text-white mb-2 flex justify-between items-center">
                         License Expiry Date: {driver.license_expiry_date}

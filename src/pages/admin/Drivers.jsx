@@ -39,7 +39,7 @@ function Drivers() {
         });
 
         console.log(formDelete)
-        // document.getElementById('deleteModal').showModal()
+        document.getElementById('deleteModal').showModal()
     }
 
     let driversData = '';
@@ -157,6 +157,26 @@ function Drivers() {
                     {driversData}
                 </tbody>
             </table>
+            <dialog id="deleteModal" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Delete Vehicle?</h3>
+                    <p className="py-4">ID: {formDelete.id}</p>
+                    <p className="py-4">Name: {formDelete.full_name}</p>
+                    <p className="py-4">Email: {formDelete.email}</p>
+                    <p className="py-4">Vehicle Type: {formDelete.profile_picture}</p>
+                    <button
+                        className="btn btn-outline btn-error w-full"
+                        // onClick={removeVehicle}
+                        >
+                        Delete
+                    </button>
+                    <div className="modal-action mt-2">
+                        <form method="dialog" className="w-full">
+                            <button className="btn w-full" >Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     )
 }
