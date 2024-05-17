@@ -95,7 +95,6 @@ function VehiclesAdd(props) {
         </option>
     ));
 
-    // Add the initial "Choose Vehicle type" option
     vehicletypesData.unshift(
         <option key="default" disabled value="">
             Choose Vehicle type

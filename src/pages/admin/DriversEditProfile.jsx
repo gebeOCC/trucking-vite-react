@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../axios/axiosInstance";
-import Toast from "../components/Toast";
 function DriversEditProfile(props) {
     const [editing, setEditing] = useState(false)
-
-    const [loading, setLoading] = useState(false)
-
-    const [toastMessage, setToastMessage] = useState('');
-    const [successToast, setSuccessToast] = useState(false);
+    const [formChange, setFormChange] = useState(false)
+    const [submiting, setSubmiting] = useState(false)
 
     const [form, setForm] = useState({
         // users profile
@@ -26,7 +22,6 @@ function DriversEditProfile(props) {
         province: '',
         zip: '',
     })
-
 
     const setFormDefault = () => {
         setForm({
@@ -48,7 +43,7 @@ function DriversEditProfile(props) {
 
     useEffect(() => {
         setFormDefault();
-    }, [])
+    }, [editing])
 
     const [invalidFields, setInvalidFields] = useState([""]);
 
@@ -59,15 +54,23 @@ function DriversEditProfile(props) {
                 [e.target.name]: e.target.name === "profile_picture" ? e.target.files[0] : e.target.value,
             }));
         }
+        setFormChange(true)
     };
 
     const edit = () => {
         setEditing(!editing)
         setFormDefault()
+        setInvalidFields([])
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!formChange) {
+            console.log('didnt change something')
+            setEditing(false)
+            return;
+        }
 
         const invalidFields = [];
         if (!form.first_name) invalidFields.push('first_name');
@@ -84,9 +87,10 @@ function DriversEditProfile(props) {
 
         console.log(form);
         if (invalidFields.length > 0) {
-            setLoading(false);
             return;
         }
+
+        setSubmiting(true)
 
         const formData = new FormData();
         formData.append('profile_picture', form.profile_picture);
@@ -104,12 +108,31 @@ function DriversEditProfile(props) {
 
         await axiosInstance.post(`update-driver-profile/${props.formProfile.id}`, formData)
             .then(response => {
-                if (response.data.message) {
+                if (response.data.message === 'Driver updated successfully') {
                     console.log(response.data.message)
-                    setSuccessToast(true)
+                    props.setFormProfile({
+                        ...props.formProfile,
+                        first_name: form.first_name,
+                        last_name: form.last_name,
+                        phone_number: form.phone_number,
+
+                        date_of_birth: form.date_of_birth,
+                        gender: form.gender,
+
+                        // address
+                        barangay: form.barangay,
+                        city: form.city,
+                        province: form.province,
+                        zip: form.zip,
+                    })
                 }
-                setLoading(false);
             })
+            .finally(() => {
+                setEditing(false)
+                setSubmiting(false)
+                setFormChange(false)
+            }
+            )
     }
 
     return (
@@ -254,7 +277,7 @@ function DriversEditProfile(props) {
                     </div>
                     {editing &&
                         <div className="flex gap-2 mt-2">
-                            <button type="submit" className="btn btn-primary w-full" onClick={handleSubmit}>Submit</button>
+                            <button type="submit" disabled={submiting} className="btn btn-primary w-full" onClick={handleSubmit}>Submit</button>
                         </div>
                     }
                 </form>
@@ -264,9 +287,6 @@ function DriversEditProfile(props) {
                     <button className="btn btn-secondary" onClick={edit}>Cancel</button>
                 }
             </div>
-
-            {/* Toast */}
-            <Toast successToast={successToast} message={toastMessage} setSuccessToast={setSuccessToast} />
         </>
     );
 }

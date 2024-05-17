@@ -13,7 +13,8 @@ import VehiclesAdd from './pages/admin/VehiclesAdd';
 import VehiclesEdit from './pages/admin/VehiclesEdit';
 import DriversAdd from './pages/admin/DriversAdd';
 import DriversEdit from './pages/admin/DriversEdit';
-import BookingAssign from './pages/admin/Booking/BookingAssign'; 
+import BookingAssign from './pages/admin/Booking/BookingAssign';
+import DriverTravels from './pages/admin/DriverTravels';
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
                         <Route path="/drivers" element={<Drivers />} />
                         <Route path="/drivers/add-driver" element={<DriversAdd />} />
                         <Route path="/drivers/edit-driver/:id" element={<DriversEdit />} />
+                        <Route path="/drivers/driver-travels/:id" element={<DriverTravels />} />
 
                         <Route path="/clients" element={<Clients />} />
 

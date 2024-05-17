@@ -16,7 +16,6 @@ function DriversEdit() {
         await axiosInstance.get(`get-driver-profile/${id}`)
             .then(response => {
                 setFormProfile(response.data)
-                // console.log(response.data)
             })
     }
 
@@ -55,7 +54,6 @@ function DriversEdit() {
                 </label>
             </Link>
             <div>
-
                 <span className="loading loading-ring loading-lg"></span>
             </div>
         </>
@@ -74,9 +72,9 @@ function DriversEdit() {
             </Link>
 
             <div className="flex flex-col w-full gap-6">
-                <DriversEditProfile formProfile={formProfile} />
-                <DriversEditInfo formInfo={formInfo} />
-                <DriversEditCredentials formCredentials={formCredentials} />
+                <DriversEditProfile formProfile={formProfile} setFormProfile={setFormProfile}/>
+                <DriversEditInfo formInfo={formInfo} setFormInfo={setFormInfo}/>
+                <DriversEditCredentials formCredentials={formCredentials} setFormCredentials={setFormCredentials} />
             </div>
         </>
     )

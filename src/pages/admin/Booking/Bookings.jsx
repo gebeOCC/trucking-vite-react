@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axiosInstance from "../../../axios/axiosInstance";
 import { Link } from "react-router-dom";
 
+import { formatDate, convertToAMPM } from "../../../Utilities/utils";
+
 function Bookings() {
     const [bookings, setBookings] = useState([]);
     const [fetchLoading, setFetchLoading] = useState(true);
@@ -14,31 +16,6 @@ function Bookings() {
                 setFetchLoading(false)
             })
     }, [])
-
-    const formatDate = (dateString) => {
-        const options = { month: 'long', day: 'numeric', year: 'numeric' };
-        const date = new Date(dateString);
-        return date.toLocaleString('en-US', options);
-    };
-
-    function convertToAMPM(time) {
-        // Create a new Date object from the input time string
-        const date = new Date(`2000-01-01T${time}`);
-
-        // Get the hours and minutes components
-        let hours = date.getHours();
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-
-        // Convert hours to 12-hour format
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // Handle 0 (midnight) as 12 AM
-
-        // Format the time string
-        const formattedTime = `${hours}:${minutes} ${ampm}`;
-
-        return formattedTime;
-    }
 
     var bookingsData = "";
 

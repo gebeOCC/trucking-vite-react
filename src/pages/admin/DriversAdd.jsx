@@ -1,14 +1,14 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Toast from "../components/Toast"
 import axiosInstance from "../../axios/axiosInstance"
 
 function DriversAdd() {
     const [loading, setLoading] = useState(false)
 
+    const navigate = useNavigate();
 
-    const [toastMessage, setToastMessage] = useState('');
-    const [successToast, setSuccessToast] = useState(false);
+    const [emailExist, setEmailExist] = useState(false);
 
     const [form, setForm] = useState({
         // users
@@ -46,10 +46,6 @@ function DriversAdd() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // setLoading(true)
-
-        // console.log(form)
 
         const invalidFields = [];
         if (!form.email) invalidFields.push('email');
@@ -100,9 +96,11 @@ function DriversAdd() {
             .then(response => {
                 console.log(response.data.message)
                 if (response.data.message) {
-                    setToastMessage(response.data.message)
-                    setSuccessToast(true)
-                    setForm({ email: '', password: '', role: 'driver', profile_picture: '', license_number: '', license_expiry_date: '', first_name: '', last_name: '', phone_number: '', date_of_birth: '', gender: '', barangay: '', city: '', province: '', zip: '', })
+                    if (response.data.message === 'success') {
+                        navigate('/drivers')
+                    } else if (response.data.message === 'Email exist') {
+                        setEmailExist(true)
+                    }
                 }
                 setLoading(false);
             })
@@ -301,6 +299,9 @@ function DriversAdd() {
                         name="email"
                         placeholder=""
                         className={`input w-full ${invalidFields.includes('email') ? 'input-error' : 'input-bordered'}`} />
+                    {emailExist &&
+                        <p style={{ color: 'red' }}>Email already exist</p>
+                    }
                 </label>
                     <label className="form-control w-full">
                         <div className="label">
@@ -317,10 +318,7 @@ function DriversAdd() {
                 </div>
 
                 <button className="btn btn-primary" type="submit" disabled={loading} onClick={handleSubmit}>Submit</button>
-
             </form>
-            {/* Toast */}
-            <Toast successToast={successToast} message={toastMessage} setSuccessToast={setSuccessToast} />
         </>
     )
 }
