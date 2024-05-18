@@ -52,7 +52,7 @@ function DriversEditProfile(props) {
             setForm((prev) => ({
                 ...prev,
                 [e.target.name]: e.target.name === "profile_picture" ? e.target.files[0] : e.target.value,
-            }));
+            })); 
         }
         setFormChange(true)
     };

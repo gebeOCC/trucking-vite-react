@@ -76,7 +76,7 @@ function VehicleTypes() {
         const editModal = document.getElementById("add-vehicle-modal");
         editModal.checked = !editModal.checked;
     }
-
+    
     const deleteVehicleType = (id) => {
         setId(id)
         getVehicletype(id)

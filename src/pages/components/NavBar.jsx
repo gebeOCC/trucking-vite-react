@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import axiosInstance from "../../axios/axiosInstance";
 
-function NavBar() {
+function NavBar({ navbarDirectory  }) {
+
     const handleDrawerToggle = () => {
         const drawerCheckbox = document.getElementById("my-drawer-2");
         drawerCheckbox.checked = !drawerCheckbox.checked;
@@ -54,14 +54,12 @@ function NavBar() {
                 <div className="flex-1">
                     <div className="max-w-xxl text-sm breadcrumbs">
                         <ul>
-                            {/* <li><a className="btn btn-ghost text-xl p-0">Dashboard</a></li> */}
-                            {/* <li><a className="btn btn-ghost text-xl p-0">Dashboard</a></li>
-                                    <li><a className="btn btn-ghost text-xl p-0">Dashboard</a></li> */}
+                            <li><a className="btn btn-ghost text-xl p-0">{navbarDirectory}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div className="flex-none gap-2">
-                    <div className="join">
+                    {/* <div className="join">
                         <div>
                             <div>
                                 <input className="input input-bordered join-item bg-base-200" placeholder="Search" />
@@ -76,7 +74,7 @@ function NavBar() {
                         <div className="indicator">
                             <button className="btn join-item select-bordered bg-base-100 ">Search</button>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
@@ -97,7 +95,7 @@ function NavBar() {
             </div>
         </>
     );
-    
+
 }
 
 export default NavBar;

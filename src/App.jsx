@@ -15,7 +15,7 @@ import DriversAdd from './pages/admin/DriversAdd';
 import DriversEdit from './pages/admin/DriversEdit';
 import BookingAssign from './pages/admin/Booking/BookingAssign';
 import DriverTravels from './pages/admin/DriverTravels';
-
+import ClientBookings from './pages/admin/ClientBookings';
 
 function App() {
     const [role, setRole] = useState('');
@@ -47,12 +47,11 @@ function App() {
     if (isLoading) {
         return (
             <div className='flex justify-center'>
-
                 <span className="loading loading-dots loading-lg"></span>
             </div>
         )
     }
-
+    
     return (
         <BrowserRouter>
             <Routes>
@@ -76,6 +75,7 @@ function App() {
                         <Route path="/drivers/driver-travels/:id" element={<DriverTravels />} />
 
                         <Route path="/clients" element={<Clients />} />
+                        <Route path="/clients/client-bookings/:id" element={<ClientBookings />} />
 
                         <Route path="/" element={<Navigate to="/dashboard" />} />
                         <Route path="/*" element={<Navigate to="/dashboard" />} />

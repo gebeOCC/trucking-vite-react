@@ -42,3 +42,10 @@ export const dataURItoBlob = (dataURI) => {
     }
     return new Blob([arrayBuffer], { type: mimeString });
 };
+
+export function formatPrice(price) {
+    return price.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+}

@@ -8,8 +8,8 @@ function DriverTravels() {
     const { id } = useParams();
     const [travels, setTravels] = useState([]);
     const [driverInfo, setDriverInfo] = useState([]);
+    const [vehicleUsage, setVehicleUsage] = useState([]);
     const [fetchLoading, setFetchLoading] = useState(true);
-    const [travelDetails, setTravelDetails] = useState([]);
     const [travelId, setTravelId] = useState(0);
 
     const driverTravels = async () => {
@@ -17,6 +17,7 @@ function DriverTravels() {
             .then(response => {
                 setTravels(response.data.travels)
                 setDriverInfo(response.data.driver_info)
+                setVehicleUsage(response.data.vehicleUsage)
                 console.log(response.data)
                 setFetchLoading(false)
             })
@@ -25,10 +26,6 @@ function DriverTravels() {
     useEffect(() => {
         driverTravels();
     }, [])
-
-    const getTravelDetails = async (id) => {
-        setTravelId(id)
-    }
 
     let tavelsData = '';
 
@@ -43,7 +40,7 @@ function DriverTravels() {
                 <td>
                     {travelId !== travel.id ? (
                         <svg
-                            onClick={() => getTravelDetails(travel.id)}
+                            onClick={() => setTravelId(travel.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -109,22 +106,49 @@ function DriverTravels() {
                     </div>
 
                     {travelId === 0 ? (
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Status</th>
-                                    <th>Pickup type</th>
-                                    <th>Pickup date</th>
-                                    <th>Pickup time</th>
-                                    <th>Client</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* TBODY */}
-                                {tavelsData}
-                            </tbody>
-                        </table>
+                            <div className="flex flex-col lg:flex-row justify-around">
+                                <div className="w-full lg:w-7/12 mb-8 lg:mb-0">
+                                    <h1 className="text-2xl font-bold">Travels</h1>
+                                    <table className="table bg-neutral w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Pickup type</th>
+                                                <th>Pickup date</th>
+                                                <th>Pickup time</th>
+                                                <th>Client</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {/* TBODY */}
+                                            {tavelsData}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="w-full lg:w-4/12">
+                                    <h1 className="text-2xl font-bold">Vehicles usage</h1>
+                                    <table className="table bg-neutral w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>Vehicle type</th>
+                                                <th>Vehicle</th>
+                                                <th>Total usage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {/* TBODY */}
+                                            {vehicleUsage.map((usage) => (
+                                                <tr key={usage.id}>
+                                                    <th>{usage.vehicle_type_name}</th>
+                                                    <td>{usage.model}</td>
+                                                    <td>{usage.travel_usage}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                     ) : (
                         <TravelDetails travelId={travelId} setTravelId={setTravelId} />
                     )
