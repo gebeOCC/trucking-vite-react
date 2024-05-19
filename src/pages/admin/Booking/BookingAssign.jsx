@@ -12,6 +12,8 @@ function BookingAssign() {
     const [fetchLoading, setFetchLoading] = useState(true);
     const [showComponent, setShowComponent] = useState('vehicle');
     const [success, setSuccess] = useState(false);
+    const [decline, setDecline] = useState(false);
+    const [message, setMessage] = useState('');
 
     const [form, setForm] = useState({
         booking_id: id,
@@ -33,7 +35,6 @@ function BookingAssign() {
     useEffect(() => {
         getBooking();
     }, []);
-
 
     if (booking.booking_status === 'approved') {
         return <>
@@ -60,6 +61,7 @@ function BookingAssign() {
                 }
             })
     }
+
 
     if (fetchLoading) {
         return (
@@ -102,6 +104,15 @@ function BookingAssign() {
         return formattedTime;
     }
 
+    const submitDeclineMessage = async () => {
+        await axiosInstance.post(`add-message/${id}`,
+            {
+                message: message
+            })
+            .then(response => {
+                console.log(response.data)
+            })
+    }
 
     return (
         <>
@@ -139,44 +150,76 @@ function BookingAssign() {
                             <span className="font-semibold text-accent">₱{booking.price}</span>
                         </div>
                         <div className="divider"></div>
-                        <div className="flex justify-between">
-                            <div className="w-3/5">
-                                <span className="text-lg font-bold text-gray-600">Vehicle:</span>
-                                {form.vehicle_id && selectedVehicle ? (
-                                    <>
-                                        <p className="text-accent">{selectedVehicle.model}</p>
-                                        <p className="text-accent">{selectedVehicle.plate_number}</p>
-                                    </>
+                        <div className="flex flex-col gap-2">
+                            <button
+                                onClick={() => { setDecline(!decline) }}
+                                className="btn btn-error mb-3">
+                                {decline ? (
+                                    'Cancel'
                                 ) : (
-                                    <></>
+                                    'Decline'
                                 )
                                 }
-                            </div>
-                            <div className="w-3/5">
-                                <span className="text-lg font-bold text-gray-600">Driver:</span>
-                                {form.driver_id && selectedDriver ? (
-                                    <>
-                                        <p className="text-accent">{selectedDriver.full_name}</p>
-                                        <p className="text-accent">{selectedDriver.license_expiry_date}</p>
-                                    </>
-                                ) : (
-                                    <></>
-                                )
-                                }
-                            </div>
+                            </button>
+
+                            {decline ? (
+                                <>
+                                    <textarea
+                                        value={message}
+                                        onChange={(e) => { setMessage(e.target.value) }}
+                                        className="textarea textarea-bordered"
+                                        placeholder="Message">
+                                    </textarea>
+                                    <button
+                                        onClick={submitDeclineMessage}
+                                        className="btn btn-primary ">
+                                        Submit
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="flex justify-between">
+                                        <div className="w-3/5">
+                                            <span className="text-lg font-bold text-gray-600">Vehicle:</span>
+                                            {form.vehicle_id && selectedVehicle ? (
+                                                <>
+                                                    <p className="text-accent">{selectedVehicle.model}</p>
+                                                    <p className="text-accent">{selectedVehicle.plate_number}</p>
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )
+                                            }
+                                        </div>
+                                        <div className="w-3/5">
+                                            <span className="text-lg font-bold text-gray-600">Driver:</span>
+                                            {form.driver_id && selectedDriver ? (
+                                                <>
+                                                    <p className="text-accent">{selectedDriver.full_name}</p>
+                                                    <p className="text-accent">{selectedDriver.license_expiry_date}</p>
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )
+                                            }
+                                        </div>
+                                    </div>
+                                    {form.vehicle_id && form.driver_id ? (
+                                        <>
+                                            <button
+                                                onClick={handleSubmit}
+                                                className="btn btn-primary ">
+                                                Submit
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )
+                                    }
+                                </>
+                            )
+                            }
                         </div>
-                        {form.vehicle_id && form.driver_id ? (
-                            <>
-                                <button
-                                    onClick={handleSubmit}
-                                    className="btn btn-primary ">
-                                    Submit
-                                </button>
-                            </>
-                        ) : (
-                            <></>
-                        )
-                        }
                     </div>
                 </div>
 

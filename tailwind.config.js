@@ -67,9 +67,6 @@ export default {
         ],
     },
     plugins: [
-        require('daisyui'),
-        require('flowbite/plugin')({
-            charts: true,
-        }),
+        require('daisyui')
     ],
 }
